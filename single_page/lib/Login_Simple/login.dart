@@ -1,8 +1,25 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  void _handleLogin() {
+    final username = _usernameController.text;
+    final password = _passwordController.text;
+
+    // Print to console (for now)
+    print("Username: $username");
+    print("Password: $password");
+
+    // You can now add validation or API calls here
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -30,7 +47,7 @@ class LoginPage extends StatelessWidget {
           "Welcome Back",
           style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
         ),
-        Text("Enter your credential to login"),
+        Text("Enter your credentials to login"),
       ],
     );
   }
@@ -40,6 +57,7 @@ class LoginPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         TextField(
+          controller: _usernameController,
           decoration: InputDecoration(
             hintText: "Username",
             border: OutlineInputBorder(
@@ -53,6 +71,7 @@ class LoginPage extends StatelessWidget {
         ),
         SizedBox(height: 10),
         TextField(
+          controller: _passwordController,
           decoration: InputDecoration(
             hintText: "Password",
             border: OutlineInputBorder(
@@ -61,13 +80,13 @@ class LoginPage extends StatelessWidget {
             ),
             fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
             filled: true,
-            prefixIcon: Icon(Icons.person),
+            prefixIcon: Icon(Icons.lock),
           ),
           obscureText: true,
         ),
         SizedBox(height: 10),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: _handleLogin,
           child: Text("Login", style: TextStyle(fontSize: 20)),
           style: ElevatedButton.styleFrom(
             shape: StadiumBorder(),
@@ -86,7 +105,7 @@ class LoginPage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("Dont have an account? "),
+        Text("Don't have an account? "),
         TextButton(onPressed: () {}, child: Text("Sign Up")),
       ],
     );
